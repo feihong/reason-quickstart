@@ -8,7 +8,7 @@
 
     bsb -init hello-reason -theme basic-reason
 
-# Build
+# Commands
 
 Build
 
@@ -22,3 +22,10 @@ Build automatically inside VS Code
 
     Cmd+Shift+B
 
+Run
+
+    node src/Demo.bs.js
+
+# Search for libraries
+
+Visit [Redex, the Reason Package Index](https://redex.github.io/).
