@@ -2,6 +2,11 @@
 'use strict';
 
 
-console.log("\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\x96\xe7\x95\x8c");
+var mesg = ( '你好世界！' );
 
-/*  Not a pure module */
+console.log(mesg);
+
+console.log("\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\x96\xe7\x95\x8c\xef\xbc\x81");
+
+exports.mesg = mesg;
+/* mesg Not a pure module */
