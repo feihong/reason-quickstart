@@ -1,18 +1,24 @@
 # Feihong's Reason Quickstart
 
+# Prerequisites
+
+    yarn global add bs-platform
+
+# Create project
+
+    bsb -init hello-reason -theme basic-reason
 
 # Build
-```
-npm run build
-```
 
-# Build + Watch
+Build
 
-```
-npm run start
-```
+    npm run build
 
-Inside VS Code, use `Cmd + Shift + B` to build automatically.
+Build + Watch
 
-# Editor
+    npm run start
+
+Build automatically inside VS Code
+
+    Cmd+Shift+B
 
