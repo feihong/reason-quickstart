@@ -8,5 +8,14 @@ console.log(mesg);
 
 console.log("\xe4\xbd\xa0\xe5\xa5\xbd\xe4\xb8\x96\xe7\x95\x8c\xef\xbc\x81");
 
+var john = {
+  name: "John",
+  age: 34,
+  job: "Cyborg Mechnanic"
+};
+
+console.log(john);
+
 exports.mesg = mesg;
+exports.john = john;
 /* mesg Not a pure module */
