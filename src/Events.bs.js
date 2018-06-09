@@ -3,19 +3,33 @@
 
 var Fs = require("fs");
 var Json = require("bs-json/src/Json.js");
+var Axios = require("bs-axios/src/axios.js");
+var Axios$1 = require("axios");
 var Json_decode = require("bs-json/src/Json_decode.js");
 
 function getAccessToken() {
   return Json_decode.field("eventbrite_access_token", Json_decode.string, Json.parseOrRaise(Fs.readFileSync("secrets.json", "utf8")));
 }
 
-var params = {
-  token: getAccessToken(/* () */0),
-  "location.address": "2100 S Wentworth Ave, Chicago, IL 60616",
-  "location.within": "1mi",
-  sort_by: "date"
+var cfg = {
+  transformResponse: Axios.makeResponseTransformer1((function (a) {
+          return a;
+        })),
+  params: {
+    token: getAccessToken(/* () */0),
+    "location.address": "2100 S Wentworth Ave, Chicago, IL 60616",
+    "location.within": "1mi",
+    sort_by: "date"
+  },
+  responseType: "text"
 };
 
+Axios$1.get("https://www.eventbriteapi.com/v3/events/search", cfg).then((function (res) {
+        console.log(res.status);
+        Fs.writeFileSync("results.json", res.data, "utf8");
+        return Promise.resolve(true);
+      }));
+
 exports.getAccessToken = getAccessToken;
-exports.params = params;
-/* params Not a pure module */
+exports.cfg = cfg;
+/* cfg Not a pure module */
