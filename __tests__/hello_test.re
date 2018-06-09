@@ -8,4 +8,7 @@ describe("Expect", () => {
 
     test("Subtraction", () => 
         expect(5 - 66) |> toBe(-61));
+
+    test("Concatenation", () =>
+        expect("ab" ++ "cd") |> toBe("abcd"))
 });

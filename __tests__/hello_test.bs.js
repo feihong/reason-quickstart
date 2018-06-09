@@ -7,8 +7,11 @@ describe("Expect", (function () {
         Jest.test("Addition", (function () {
                 return Jest.Expect[/* toBe */2](7, Jest.Expect[/* expect */0](7));
               }));
-        return Jest.test("Subtraction", (function () {
-                      return Jest.Expect[/* toBe */2](-61, Jest.Expect[/* expect */0](-61));
+        Jest.test("Subtraction", (function () {
+                return Jest.Expect[/* toBe */2](-61, Jest.Expect[/* expect */0](-61));
+              }));
+        return Jest.test("Concatenation", (function () {
+                      return Jest.Expect[/* toBe */2]("abcd", Jest.Expect[/* expect */0]("abcd"));
                     }));
       }));
 
