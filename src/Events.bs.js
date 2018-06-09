@@ -3,13 +3,16 @@
 
 var Fs = require("fs");
 var Json = require("bs-json/src/Json.js");
+var Axios = require("axios");
 var Json_decode = require("bs-json/src/Json_decode.js");
 
 function getAccessToken() {
   return Json_decode.field("eventbrite_access_token", Json_decode.string, Json.parseOrRaise(Fs.readFileSync("secrets.json", "utf8")));
 }
 
-console.log(getAccessToken(/* () */0));
+Axios.get("http://ipecho.net/plain").then((function (res) {
+        return Promise.resolve((console.log(res.data), /* () */0));
+      }));
 
 exports.getAccessToken = getAccessToken;
 /*  Not a pure module */
