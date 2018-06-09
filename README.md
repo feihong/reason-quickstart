@@ -26,6 +26,10 @@ Run
 
     node src/Demo.bs.js
 
+Run tests
+
+    yarn test
+
 # Search for libraries
 
 Visit [Redex, the Reason Package Index](https://redex.github.io/).
