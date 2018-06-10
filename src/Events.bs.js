@@ -5,6 +5,7 @@ var Fs = require("fs");
 var Json = require("bs-json/src/Json.js");
 var Axios = require("axios");
 var Json_decode = require("bs-json/src/Json_decode.js");
+var Helpers$HelloReason = require("./Helpers.bs.js");
 
 function getAccessToken() {
   return Json_decode.field("eventbrite_access_token", Json_decode.string, Json.parseOrRaise(Fs.readFileSync("secrets.json", "utf8")));
@@ -21,7 +22,7 @@ var cfg = {
 
 Axios.get("https://www.eventbriteapi.com/v3/events/search", cfg).then((function (res) {
         console.log(res.status);
-        var text = ( JSON.stringify(res.data, null, 2) );
+        var text = Helpers$HelloReason.prettyStringify(res.data);
         Fs.writeFileSync("results.json", text, "utf8");
         return Promise.resolve(true);
       }));
