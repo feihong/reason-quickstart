@@ -23,28 +23,33 @@ var response = (
 }    
 );
 
+function getEvents(response) {
+  return response.events;
+}
+
 $$Array.iter((function (evt) {
-        console.log(Curry._2(Printf.sprintf(/* Format */[
-                      /* String */Block.__(2, [
-                          /* No_padding */0,
-                          /* String_literal */Block.__(11, [
-                              " (",
-                              /* Int */Block.__(4, [
-                                  /* Int_i */3,
-                                  /* No_padding */0,
-                                  /* No_precision */0,
-                                  /* String_literal */Block.__(11, [
-                                      " guests)",
-                                      /* End_of_format */0
-                                    ])
+        Curry._2(Printf.printf(/* Format */[
+                  /* String */Block.__(2, [
+                      /* No_padding */0,
+                      /* String_literal */Block.__(11, [
+                          " (",
+                          /* Int */Block.__(4, [
+                              /* Int_i */3,
+                              /* No_padding */0,
+                              /* No_precision */0,
+                              /* String_literal */Block.__(11, [
+                                  " guests)\n",
+                                  /* End_of_format */0
                                 ])
                             ])
-                        ]),
-                      "%s (%i guests)"
-                    ]), evt.name, evt.rsvp_count));
+                        ])
+                    ]),
+                  "%s (%i guests)\n"
+                ]), evt.name, evt.rsvp_count);
         console.log("  " + (evt.description + "\n"));
         return /* () */0;
       }), response.events);
 
 exports.response = response;
+exports.getEvents = getEvents;
 /* response Not a pure module */

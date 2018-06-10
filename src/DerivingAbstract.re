@@ -22,11 +22,15 @@ type event = {
     rsvp_count: int,
 };
 
-[@bs.val] external events: array(event) = "response.events";
+let getEvents = (response) => {
+    let events: array(event) = response##events;
+    events;
+};
 
-/* Js.log(events); */
+/* Js.log(getEvents(response)); */
 
-events |> Array.iter(evt => {
-    Printf.sprintf("%s (%i guests)", evt |. name, evt |. rsvp_count) |> Js.log;
+getEvents(response)
+|> Array.iter(evt => {
+    Printf.printf("%s (%i guests)\n", evt |. name, evt |. rsvp_count);
     Js.log("  " ++ (evt |. description) ++ "\n");
-});
+  });
