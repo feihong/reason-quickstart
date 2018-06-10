@@ -27,6 +27,6 @@ type event = {
 /* Js.log(events); */
 
 events |> Array.iter(evt => {
-    Js.log(evt |. name);
-    Js.log(evt |. description);
+    Printf.sprintf("%s (%i guests)", evt |. name, evt |. rsvp_count) |> Js.log;
+    Js.log("  " ++ (evt |. description) ++ "\n");
 });

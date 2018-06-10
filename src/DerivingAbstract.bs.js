@@ -2,6 +2,9 @@
 'use strict';
 
 var $$Array = require("bs-platform/lib/js/array.js");
+var Block = require("bs-platform/lib/js/block.js");
+var Curry = require("bs-platform/lib/js/curry.js");
+var Printf = require("bs-platform/lib/js/printf.js");
 
 var response = ( 
 {
@@ -21,8 +24,25 @@ var response = (
 );
 
 $$Array.iter((function (evt) {
-        console.log(evt.name);
-        console.log(evt.description);
+        console.log(Curry._2(Printf.sprintf(/* Format */[
+                      /* String */Block.__(2, [
+                          /* No_padding */0,
+                          /* String_literal */Block.__(11, [
+                              " (",
+                              /* Int */Block.__(4, [
+                                  /* Int_i */3,
+                                  /* No_padding */0,
+                                  /* No_precision */0,
+                                  /* String_literal */Block.__(11, [
+                                      " guests)",
+                                      /* End_of_format */0
+                                    ])
+                                ])
+                            ])
+                        ]),
+                      "%s (%i guests)"
+                    ]), evt.name, evt.rsvp_count));
+        console.log("  " + (evt.description + "\n"));
         return /* () */0;
       }), response.events);
 
