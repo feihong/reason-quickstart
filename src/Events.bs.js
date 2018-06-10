@@ -3,8 +3,7 @@
 
 var Fs = require("fs");
 var Json = require("bs-json/src/Json.js");
-var Axios = require("bs-axios/src/axios.js");
-var Axios$1 = require("axios");
+var Axios = require("axios");
 var Json_decode = require("bs-json/src/Json_decode.js");
 
 function getAccessToken() {
@@ -12,21 +11,18 @@ function getAccessToken() {
 }
 
 var cfg = {
-  transformResponse: Axios.makeResponseTransformer1((function (a) {
-          return a;
-        })),
   params: {
     token: getAccessToken(/* () */0),
     "location.address": "2100 S Wentworth Ave, Chicago, IL 60616",
     "location.within": "1mi",
     sort_by: "date"
-  },
-  responseType: "text"
+  }
 };
 
-Axios$1.get("https://www.eventbriteapi.com/v3/events/search", cfg).then((function (res) {
+Axios.get("https://www.eventbriteapi.com/v3/events/search", cfg).then((function (res) {
         console.log(res.status);
-        Fs.writeFileSync("results.json", res.data, "utf8");
+        var text = ( JSON.stringify(res.data, null, 2) );
+        Fs.writeFileSync("results.json", text, "utf8");
         return Promise.resolve(true);
       }));
 
