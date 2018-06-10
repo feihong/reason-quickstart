@@ -13,7 +13,11 @@ var response = (
             name: 'Block Party',
             description: 'Come to a party on my block',
             type: 'party',
-            rsvp_count: 7
+            rsvp_count: 7,
+            venue: {
+                name: 'The Best Block EVAR',
+                address: '400-500 N Groob Ln'
+            }
         },
         {
             name: 'Harvest Parade',
@@ -61,6 +65,12 @@ $$Array.iter((function (evt) {
                     ]),
                   "  This is a %s event\n"
                 ]), evt.type);
+        var match = evt.venue;
+        if (match !== undefined) {
+          console.log("  " + match.address);
+        } else {
+          console.log("  Venue is not known");
+        }
         console.log("  " + (evt.description + "\n"));
         return /* () */0;
       }), response.events);
