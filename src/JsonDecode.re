@@ -1,3 +1,7 @@
+/**
+ * Note that this is the deprecated way to do things.
+ */
+
 let text = {|
 {
     "name": "Wario",
