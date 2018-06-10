@@ -12,11 +12,13 @@ var response = (
         {
             name: 'Block Party',
             description: 'Come to a party on my block',
+            type: 'party',
             rsvp_count: 7
         },
         {
             name: 'Harvest Parade',
             description: 'A wonderful parade featuring tomatoes and potatoes',
+            type: 'parade',
             rsvp_count: 305
         }
     ]
@@ -46,6 +48,19 @@ $$Array.iter((function (evt) {
                     ]),
                   "%s (%i guests)\n"
                 ]), evt.name, evt.rsvp_count);
+        Curry._1(Printf.printf(/* Format */[
+                  /* String_literal */Block.__(11, [
+                      "  This is a ",
+                      /* String */Block.__(2, [
+                          /* No_padding */0,
+                          /* String_literal */Block.__(11, [
+                              " event\n",
+                              /* End_of_format */0
+                            ])
+                        ])
+                    ]),
+                  "  This is a %s event\n"
+                ]), evt.type);
         console.log("  " + (evt.description + "\n"));
         return /* () */0;
       }), response.events);
