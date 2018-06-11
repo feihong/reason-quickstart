@@ -12,11 +12,11 @@
 
 Build
 
-    npm run build
+    yarn run build
 
 Build + Watch
 
-    npm run start
+    yarn run start
 
 Build automatically inside VS Code
 

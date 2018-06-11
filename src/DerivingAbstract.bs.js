@@ -8,24 +8,24 @@ var Printf = require("bs-platform/lib/js/printf.js");
 
 var response = ( 
 {
-    events: [
-        {
-            name: 'Block Party',
-            description: 'Come to a party on my block',
-            type: 'party',
-            rsvp_count: 7,
-            venue: {
-                name: 'The Best Block EVAR',
-                address: '400-500 N Groob Ln'
-            }
-        },
-        {
-            name: 'Harvest Parade',
-            description: 'A wonderful parade featuring tomatoes and potatoes',
-            type: 'parade',
-            rsvp_count: 305
-        }
-    ]
+  events: [
+    {
+      name: 'Block Party',
+      description: 'Come to a party on my block',
+      type: 'party',
+      rsvp_count: 7,
+      venue: {
+        name: 'The Best Block EVAR',
+        address: '400-500 N Groob Ln'
+      }
+    },
+    {
+      name: 'Harvest Parade',
+      description: 'A wonderful parade featuring tomatoes and potatoes',
+      type: 'parade',
+      rsvp_count: 305
+    }
+  ]
 }    
 );
 

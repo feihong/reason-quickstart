@@ -4,24 +4,24 @@
 
 let response = [%bs.raw {| 
 {
-    events: [
-        {
-            name: 'Block Party',
-            description: 'Come to a party on my block',
-            type: 'party',
-            rsvp_count: 7,
-            venue: {
-                name: 'The Best Block EVAR',
-                address: '400-500 N Groob Ln'
-            }
-        },
-        {
-            name: 'Harvest Parade',
-            description: 'A wonderful parade featuring tomatoes and potatoes',
-            type: 'parade',
-            rsvp_count: 305
-        }
-    ]
+  events: [
+    {
+      name: 'Block Party',
+      description: 'Come to a party on my block',
+      type: 'party',
+      rsvp_count: 7,
+      venue: {
+        name: 'The Best Block EVAR',
+        address: '400-500 N Groob Ln'
+      }
+    },
+    {
+      name: 'Harvest Parade',
+      description: 'A wonderful parade featuring tomatoes and potatoes',
+      type: 'parade',
+      rsvp_count: 305
+    }
+  ]
 }    
 |}];
 
@@ -29,8 +29,8 @@ let response = [%bs.raw {|
    and the record type is actually erased. */
 [@bs.deriving abstract]
 type venue = {
-    [@bs.as "name"] vname: string,
-    address: string,
+  [@bs.as "name"] vname: string,
+  address: string,
 };
 
 [@bs.deriving abstract]
