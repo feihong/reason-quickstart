@@ -3,9 +3,58 @@
 
 var Fs = require("fs");
 var Json = require("@glennsl/bs-json/src/Json.bs.js");
+var $$Array = require("bs-platform/lib/js/array.js");
 var Axios = require("axios");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var Helpers$HelloReason = require("./Helpers.bs.js");
+
+function pagination(json) {
+  return /* record */[/* page_count */Json_decode.field("page_count", Json_decode.$$int, json)];
+}
+
+function $$event(json) {
+  return /* record */[
+          /* id */Json_decode.field("id", Json_decode.string, json),
+          /* name */Json_decode.at(/* :: */[
+                  "name",
+                  /* :: */[
+                    "text",
+                    /* [] */0
+                  ]
+                ], Json_decode.string)(json),
+          /* description */Json_decode.at(/* :: */[
+                  "description",
+                  /* :: */[
+                    "text",
+                    /* [] */0
+                  ]
+                ], Json_decode.string)(json),
+          /* url */Json_decode.field("url", Json_decode.string, json),
+          /* start */Json_decode.at(/* :: */[
+                  "start",
+                  /* :: */[
+                    "local",
+                    /* [] */0
+                  ]
+                ], Json_decode.string)(json),
+          /* venue : None */0
+        ];
+}
+
+function page(json) {
+  return /* record */[
+          /* pagination */Json_decode.field("pagination", pagination, json),
+          /* events */Json_decode.field("events", (function (param) {
+                  return Json_decode.array($$event, param);
+                }), json)
+        ];
+}
+
+var Decode = /* module */[
+  /* pagination */pagination,
+  /* event */$$event,
+  /* page */page
+];
 
 function getAccessToken() {
   return Json_decode.field("eventbrite_access_token", Json_decode.string, Json.parseOrRaise(Fs.readFileSync("secrets.json", "utf8")));
@@ -21,12 +70,24 @@ var cfg = {
 };
 
 Axios.get("https://www.eventbriteapi.com/v3/events/search", cfg).then((function (res) {
-        console.log(res.status);
-        var text = Helpers$HelloReason.prettyStringify(res.data);
-        Fs.writeFileSync("results.json", text, "utf8");
-        return Promise.resolve(true);
+          console.log(res.status);
+          var text = Helpers$HelloReason.prettyStringify(res.data);
+          Fs.writeFileSync("results.json", text, "utf8");
+          $$Array.iter((function (evt) {
+                  console.log(evt[/* name */1]);
+                  return /* () */0;
+                }), page(res.data)[/* events */1]);
+          return Promise.resolve((function () {
+                        return /* () */0;
+                      }));
+        })).catch((function () {
+        console.log("Unexpected error occurred");
+        return Promise.resolve((function () {
+                      return /* () */0;
+                    }));
       }));
 
+exports.Decode = Decode;
 exports.getAccessToken = getAccessToken;
 exports.cfg = cfg;
 /* cfg Not a pure module */
