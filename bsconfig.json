@@ -20,7 +20,7 @@
   "suffix": ".bs.js",
   "bs-dependencies": [
     "bs-axios",
-    "bs-json"
+    "@glennsl/bs-json"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest"

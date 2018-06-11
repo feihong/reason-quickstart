@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "bs-axios": "^0.0.36",
-    "bs-json": "^1.0.1"
+    "@glennsl/bs-json": "^2.0.0"
   }
 }
