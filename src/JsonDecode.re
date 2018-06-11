@@ -1,31 +1,68 @@
 /**
- * Note that this is the deprecated way to do things.
+ * https://bucklescript.github.io/docs/en/object-deprecated.html
  */
 
-let text = {|
+let response = [%bs.raw {| 
 {
-    "name": "Wario",
-    "job": "Villain",
-    "powerLevel": 8999.99,
-    "bio": "Evil version of Mario"
+  events: [
+    {
+      name: 'Block Party',
+      description: 'Come to a party on my block',
+      type: 'party',
+      rsvp_count: 7,
+      venue: {
+        name: 'The Best Block EVAR',
+        address: '400-500 N Groob Ln'
+      }
+    },
+    {
+      name: 'Harvest Parade',
+      description: 'A wonderful parade featuring tomatoes and potatoes',
+      type: 'parade',
+      rsvp_count: 305
+    }
+  ]
 }    
-|};
+|}];
 
-type person = {
-    name: string,
-    job: string,
-    powerLevel: float,
-    /* leave out the bio field */
-}
-
-let json: Js.Json.t = Json.parseOrRaise(text);
-Js.log(json);
-
-/* obj will be of type person */
-let obj = Json.Decode.{
-    name: field("name", string, json),
-    job: field("job", string, json),
-    powerLevel: field("powerLevel", Json.Decode.float, json)
+type venue = {
+  name: string,
+  address: string,
 };
-Js.log(obj);
-Js.log(obj.name);
+
+type event = {
+  name: string,
+  description: string,
+  type_: string,
+  rsvp_count: int,
+  venue: option(venue),
+};
+
+module Decode = {
+  let venue = json => 
+    Json.Decode.{
+      name: json |> field("name", string),
+      address: json |> field("address", string),
+    };
+  
+  let event = json =>
+    Json.Decode.{
+      name: json |> field("name", string),
+      description: json |> field("description", string),
+      type_: json |> field("type", string),
+      rsvp_count: json |> field("rsvp_count", int),
+      venue: json |> optional(field("venue", venue)),
+    };
+};
+
+response##events 
+  |> Json.Decode.array(Decode.event)
+  |> Array.iter(evt => {
+    /* Js.log(evt); */
+    Js.log(evt.name);
+    switch(evt.venue) {
+    | None => Js.log("Venue unknown")
+    | Some(venue_) => Js.log("At " ++ venue_.name)
+    };
+    Js.log("====");
+  });

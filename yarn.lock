@@ -22,6 +22,10 @@
   dependencies:
     jest "^22.0.4"
 
+"@glennsl/bs-json@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@glennsl/bs-json/-/bs-json-2.0.0.tgz#e621aac1e94d49bc12bf493b67c01c39e61a6415"
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -412,10 +416,6 @@ bs-axios@^0.0.36:
   resolved "https://registry.yarnpkg.com/bs-axios/-/bs-axios-0.0.36.tgz#9150f1af236288e47eac4eba40cd4190b8a37222"
   dependencies:
     axios "^0.18.0"
-
-bs-json@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/bs-json/-/bs-json-1.0.1.tgz#0e25ed5ba7164ab131e494669b755da9844cc37e"
 
 bs-platform@^3.1.5:
   version "3.1.5"
