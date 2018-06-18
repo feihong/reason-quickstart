@@ -75,7 +75,7 @@ Js.Promise.(
       });
       resolve(ignore)
   })
-  |> catch(err => {
+  |> catch(_err => {
     Js.log("Unexpected error occurred");
     resolve(ignore)
   })

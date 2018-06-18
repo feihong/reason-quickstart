@@ -10,13 +10,13 @@
 
 # Commands
 
-Build
-
-    yarn run build
-
 Build + Watch
 
-    yarn run start
+    yarn start
+
+Build
+
+    yarn build
 
 Build automatically inside VS Code
 
