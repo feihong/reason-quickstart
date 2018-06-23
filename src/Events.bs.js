@@ -6,7 +6,6 @@ var Json = require("@glennsl/bs-json/src/Json.bs.js");
 var $$Array = require("bs-platform/lib/js/array.js");
 var Axios = require("axios");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
-var Helpers$HelloReason = require("./Helpers.bs.js");
 
 function pagination(json) {
   return /* record */[/* page_count */Json_decode.field("page_count", Json_decode.$$int, json)];
@@ -71,7 +70,7 @@ var cfg = {
 
 Axios.get("https://www.eventbriteapi.com/v3/events/search", cfg).then((function (res) {
           console.log(res.status);
-          var text = Helpers$HelloReason.prettyStringify(res.data);
+          var text = JSON.stringify(res.data, null, 2);
           Fs.writeFileSync("results.json", text, "utf8");
           $$Array.iter((function (evt) {
                   console.log(evt[/* name */1]);
