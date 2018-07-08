@@ -10,7 +10,10 @@ var players = /* array */[
       1,
       2,
       3
-    ]
+    ],
+    avatar: {
+      url: "https://avtr.com/amy"
+    }
   },
   {
     name: "Brolinho",
@@ -18,13 +21,17 @@ var players = /* array */[
       4,
       5,
       6
-    ]
+    ],
+    avatar: {
+      url: "https://avtr.com/brolinho"
+    }
   }
 ];
 
 players.forEach((function (player, i) {
-        console.log(i, player.name);
+        console.log("Player", i, player.name);
         console.log("First score:", Caml_array.caml_array_get(player.scores, 0));
+        console.log("Avatar image:", player.avatar.url);
         return /* () */0;
       }));
 
