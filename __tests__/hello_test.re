@@ -10,5 +10,8 @@ describe("Expect", () => {
         expect(5 - 66) |> toBe(-61));
 
     test("Concatenation", () =>
-        expect("ab" ++ "cd") |> toBe("abcd"))
+        expect("ab" ++ "cd") |> toBe("abcd"));
+
+    test("Project Euler #1", () => 
+        expect(Euler1.compute()) |> toBe(233168));
 });

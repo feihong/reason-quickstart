@@ -2,6 +2,7 @@
 'use strict';
 
 var Jest = require("@glennsl/bs-jest/src/jest.js");
+var Euler1$HelloReason = require("../src/Euler1.bs.js");
 
 describe("Expect", (function () {
         Jest.test("Addition", (function () {
@@ -10,8 +11,11 @@ describe("Expect", (function () {
         Jest.test("Subtraction", (function () {
                 return Jest.Expect[/* toBe */2](-61, Jest.Expect[/* expect */0](-61));
               }));
-        return Jest.test("Concatenation", (function () {
-                      return Jest.Expect[/* toBe */2]("abcd", Jest.Expect[/* expect */0]("abcd"));
+        Jest.test("Concatenation", (function () {
+                return Jest.Expect[/* toBe */2]("abcd", Jest.Expect[/* expect */0]("abcd"));
+              }));
+        return Jest.test("Project Euler #1", (function () {
+                      return Jest.Expect[/* toBe */2](233168, Jest.Expect[/* expect */0](Euler1$HelloReason.compute(/* () */0)));
                     }));
       }));
 
