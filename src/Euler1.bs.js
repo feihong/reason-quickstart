@@ -5,12 +5,10 @@ var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
 
 function compute() {
   return Belt_Array.reduce(Belt_Array.keep(Belt_Array.range(1, 999), (function (x) {
-                    var match = x % 3;
-                    var match$1 = x % 5;
-                    if (match !== 0) {
-                      return match$1 === 0;
-                    } else {
+                    if (x % 3 === 0) {
                       return true;
+                    } else {
+                      return x % 5 === 0;
                     }
                   })), 0, (function (prim, prim$1) {
                 return prim + prim$1 | 0;

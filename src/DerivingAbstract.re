@@ -1,5 +1,7 @@
-/**
- * https://bucklescript.github.io/docs/en/object.html#record-mode
+/*
+
+https://bucklescript.github.io/docs/en/object.html#record-mode
+
 */
 open Belt;
 

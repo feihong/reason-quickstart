@@ -1,7 +1,8 @@
-/**
- * https://www.eventbrite.com/developer/v3/endpoints/events/
- * 
- */
+/*
+ 
+https://www.eventbrite.com/developer/v3/endpoints/events/
+ 
+*/
 
 type venue = {
   id: string,
@@ -65,7 +66,7 @@ Js.Promise.(
   Axios.getc("https://www.eventbriteapi.com/v3/events/search", cfg)
   |> then_(res => { 
       Js.log(res##status);
-      let text = Helpers.prettyStringify(res##data);
+      let text = Js.Json.stringifyWithSpace(res##data, 2);
       Node.Fs.writeFileAsUtf8Sync("results.json", text);
       res##data
       |> Decode.page

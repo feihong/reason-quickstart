@@ -1,6 +1,8 @@
-/**
- * https://bucklescript.github.io/docs/en/object-deprecated.html
- */
+/*
+  
+https://bucklescript.github.io/docs/en/object-deprecated.html
+ 
+*/
 
 let response = [%bs.raw {| 
 {
