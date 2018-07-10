@@ -1,6 +1,7 @@
 /**
  * https://bucklescript.github.io/docs/en/object.html#record-mode
 */
+open Belt;
 
 let response = [%bs.raw {| 
 {
@@ -27,37 +28,41 @@ let response = [%bs.raw {|
 
 /* It looks like we are defining a record type, but it's just syntactic sugar,
    and the record type is actually erased. */
-[@bs.deriving abstract]
-type venue = {
-  [@bs.as "name"] vname: string,
-  address: string,
-};
+module Venue = {
+  [@bs.deriving abstract]
+  type t = {
+    name: string,
+    address: string,
+  }
+}
 
-[@bs.deriving abstract]
-type event = {
-  name: string,
-  description: string,
-  rsvp_count: int,
-  /* "type" is a keyword so you can't use it as a field name */
-  [@bs.as "type"] type_: string,
-  [@bs.optional] venue: venue,
-};
+module Event = {
+  [@bs.deriving abstract]
+  type t = {
+    name: string,
+    description: string,
+    rsvp_count: int,
+    /* "type" is a keyword so you can't use it as a field name */
+    [@bs.as "type"] type_: string,
+    [@bs.optional] venue: Venue.t,
+  }
+}
 
 let getEvents = (response) => {
-  /* This is an unsafe cast */
-  let events: array(event) = response##events;
+  let events: array(Event.t) = response##events;
   events;    
 };
 
 /* Js.log(getEvents(response)); */
 
 getEvents(response)
-|> Array.iter(evt => {
+|. Array.forEach(evt => {
+    open Event;
     Printf.printf("%s (%i guests)\n", evt |. name, evt |. rsvp_count);
     Printf.printf("  This is a %s event\n", evt |. type_);
     switch(evt |. venue) {
     | None => Js.log("  Venue is not known")
-    | Some(v) => Js.log("  " ++ (v |. address))
+    | Some(v) => Js.log("  " ++ (v |. Venue.address))
     };
     Js.log("  " ++ (evt |. description) ++ "\n");
-  });
+});

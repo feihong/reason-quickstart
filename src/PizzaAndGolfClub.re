@@ -1,4 +1,7 @@
 /* 
+ * Some examples that show the usage of the |> (pizza) and |. (golf club) 
+ * operators.
+ * 
  * Note that Belt.Array.map isn't the same as Array.map! Argument order is
  * reversed.
  */
