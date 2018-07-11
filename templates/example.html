@@ -23,8 +23,6 @@
 <script>
 const url = 'ws://' + document.location.host + '/reload'
 const socket = new WebSocket(url)
-const example = '{{ example }}';
-socket.addEventListener('open', () => socket.send(example))
 socket.addEventListener('close', () => console.log('Websocket was closed'))
 socket.addEventListener('message', () => window.location.reload(true))
 </script>

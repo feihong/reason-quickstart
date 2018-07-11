@@ -23,4 +23,5 @@ players
   Js.log3("Player", i, player##name);
   Js.log2("First score:", (player##scores)[0]);
   Js.log2("Avatar image:", player##avatar##url);
+  Js.log("======");
 })

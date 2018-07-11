@@ -20,12 +20,7 @@ nunjucks.configure('templates', {
   noCache: true,
 })
 
-// Only watch one file at a time
-let watching = {
-  filename: null,   // name of file to watch
-  watcher: null,    // fs.FSFileWatcher instance
-  socket: null,     // Websocket instance
-}
+let sockets = [];   // array of Websocket instances
 
 // Get an array of all .re source files.
 function getExamples() {
@@ -55,29 +50,6 @@ function getDescription(text) {
   } else {
     return converter.makeHtml(groups[1])
   }
-}
-
-function watchFile(filename, socket) {
-  console.log(`Watching ${filename}`)
-  watching.filename = filename
-
-  if (watching.socket) {
-    watching.socket.close()    
-  }
-  watching.socket = socket
-  
-  if (watching.watcher) {
-    watching.watcher.close()
-  }
-  
-  let path_ = path.join(examplesDir, filename)
-  watching.watcher = fs.watch(path_, evtType => {
-    if (evtType !== 'change') return
-    console.log(`Reloading page for ${filename}`)
-    if (socket.readyState !== 3) { // if not closed
-      socket.send('reload')
-    }
-  })
 }
 
 //***** ROUTES *****// 
@@ -112,11 +84,19 @@ app.get('/example/:name', async (req, res) => {
 })
 
 app.ws('/reload', (ws, req) => {
-  ws.on('message', filename => {
-    watchFile(filename, ws)    
+  sockets.push(ws)
+  ws.on('close', () => {
+    sockets = sockets.filter(socket => socket !== ws)
   })
 })
 
 const listener = app.listen(process.env.PORT || 8000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
+
+  fs.watch(examplesDir, {recursive: true}, (eventType, filename) => {
+    if (eventType === 'change' && path.extname(filename) === '.re') {
+      console.log('Reloading...')      
+      sockets.forEach(socket => socket.send('reload'))
+    }
+  })
 })

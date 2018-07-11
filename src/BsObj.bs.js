@@ -32,6 +32,7 @@ players.forEach((function (player, i) {
         console.log("Player", i, player.name);
         console.log("First score:", Caml_array.caml_array_get(player.scores, 0));
         console.log("Avatar image:", player.avatar.url);
+        console.log("======");
         return /* () */0;
       }));
 
