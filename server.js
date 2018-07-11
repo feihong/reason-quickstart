@@ -68,7 +68,7 @@ app.get('/example/:name', async (req, res) => {
     let output = await runCommand('node ' + jsPath)
     res.render('example.html', {
       example,
-      output,
+      output: output.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;'),
       description: getDescription(text),
     })
   } catch (err) {
