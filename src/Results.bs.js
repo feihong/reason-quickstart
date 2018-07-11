@@ -19,7 +19,7 @@ console.log(handleMessage("The rocket crashed and burned!?!"));
 
 console.log("map on Ok:", Belt_Result.map(/* Ok */Block.__(0, ["monkey shine"]), $$String.uppercase));
 
-console.log("map on Error:", Belt_Result.map(/* Error */Block.__(1, ["turtle weakness"]), $$String.uppercase));
+console.log("map on Error:", Belt_Result.map(/* Error */Block.__(1, ["monkey shine"]), $$String.uppercase));
 
 exports.handleMessage = handleMessage;
 /*  Not a pure module */

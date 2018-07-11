@@ -20,6 +20,6 @@ Result.Ok("monkey shine")
 |. Result.map(x => x |. String.uppercase)
 |> Js.log2("map on Ok:");
 
-Result.Error("turtle weakness")
+Result.Error("monkey shine")
 |. Result.map(x => x |. String.uppercase)
 |> Js.log2("map on Error:");

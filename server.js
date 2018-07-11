@@ -9,6 +9,7 @@ const express = require('express')
 const showdown = require('showdown')
 
 const app = express()
+const expressWs = require('express-ws')(app)
 app.use(express.static('public'))
 
 const converter = new showdown.Converter()
@@ -18,6 +19,13 @@ nunjucks.configure('templates', {
   autoescape: true,
   noCache: true,
 })
+
+// Only watch one file at a time
+let watching = {
+  filename: null,   // name of file to watch
+  watcher: null,    // fs.FSFileWatcher instance
+  socket: null,     // Websocket instance
+}
 
 // Get an array of all .re source files.
 function getExamples() {
@@ -41,7 +49,6 @@ function runCommand(cmd) {
 function getDescription(text) {
   // Get the contents of the top multiline comment (everything between /* and */)
   let groups = /^\/\*([\s\S]*?)\*\//.exec(text.trim())
-  console.log(text);
   
   if (groups === null) {
     return ''
@@ -49,6 +56,31 @@ function getDescription(text) {
     return converter.makeHtml(groups[1])
   }
 }
+
+function watchFile(filename, socket) {
+  console.log(`Watching ${filename}`)
+  watching.filename = filename
+
+  if (watching.socket) {
+    watching.socket.close()    
+  }
+  watching.socket = socket
+  
+  if (watching.watcher) {
+    watching.watcher.close()
+  }
+  
+  let path_ = path.join(examplesDir, filename)
+  watching.watcher = fs.watch(path_, evtType => {
+    if (evtType !== 'change') return
+    console.log(`Reloading page for ${filename}`)
+    if (socket.readyState !== 3) { // if not closed
+      socket.send('reload')
+    }
+  })
+}
+
+//***** ROUTES *****// 
 
 // Serve the home page
 app.get('/', async (req, res) => {
@@ -77,6 +109,12 @@ app.get('/example/:name', async (req, res) => {
       res.status(404).send('No such example found')
     }
   }
+})
+
+app.ws('/reload', (ws, req) => {
+  ws.on('message', filename => {
+    watchFile(filename, ws)    
+  })
 })
 
 const listener = app.listen(process.env.PORT || 8000, () => {

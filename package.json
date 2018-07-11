@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "npm-run-all --parallel bs:watch server",
-    "server": "nodemon server.js",
+    "server": "node server.js",
     "build": "bsb -make-world",
     "bs:watch": "bsb -make-world -w",
     "clean": "bsb -clean-world",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "express": "^4.16.3",
+    "express-ws": "^4.0.0",
     "fs-extra": "^6.0.1",
     "glob": "^7.1.2",
     "nunjucks": "^3.1.3",
