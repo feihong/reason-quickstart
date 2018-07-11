@@ -2,8 +2,10 @@
   "name": "hello-reason",
   "version": "0.1.0",
   "scripts": {
+    "start": "npm-run-all --parallel bs:watch server",
+    "server": "nodemon server.js",
     "build": "bsb -make-world",
-    "start": "bsb -make-world -w",
+    "bs:watch": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "jest",
     "testw": "jest --watch"
@@ -15,10 +17,15 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.2",
+    "@glennsl/bs-json": "^2.0.0",
+    "bs-axios": "^0.0.36",
     "bs-platform": "^3.1.5"
   },
   "dependencies": {
-    "bs-axios": "^0.0.36",
-    "@glennsl/bs-json": "^2.0.0"
+    "express": "^4.16.3",
+    "fs-extra": "^6.0.1",
+    "glob": "^7.1.2",
+    "nunjucks": "^3.1.3",
+    "showdown": "^1.8.6"
   }
 }
