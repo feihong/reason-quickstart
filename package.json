@@ -1,20 +1,21 @@
 {
   "name": "hello-reason",
   "version": "0.1.0",
+  "author": "Feihong Hsu",
+  "license": "MIT",
   "scripts": {
-    "start": "npm-run-all --parallel bs:watch server",
+    "start": "run-p bsb:watch server",
+    "bsb:watch": "bsb -make-world -w",
     "server": "node server.js",
-    "build": "bsb -make-world",
-    "bs:watch": "bsb -make-world -w",
+    "build": "bsb -clean-world -make-world",
     "clean": "bsb -clean-world",
     "test": "jest",
     "testw": "jest --watch"
   },
   "keywords": [
-    "BuckleScript"
+    "BuckleScript",
+    "Reason"
   ],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.2",
     "@glennsl/bs-json": "^2.0.0",
