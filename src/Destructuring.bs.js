@@ -10,6 +10,22 @@ var b = "two";
 
 console.log("Tuple values:", 1, b, 34.56);
 
+var player1 = /* record */[
+  /* name */"BurgerKingLizard",
+  /* powerLevel */9000.126,
+  /* classes : :: */[
+    "NecroPaladin",
+    /* :: */[
+      "NinjaBerserker",
+      /* [] */0
+    ]
+  ],
+  /* location : record */[
+    /* country */"tw",
+    /* state : None */0
+  ]
+];
+
 var country = "tw";
 
 var classes = /* :: */[
@@ -20,7 +36,11 @@ var classes = /* :: */[
   ]
 ];
 
-var name = "BurgerLizard";
+var name = "BurgerKingLizard";
+
+var state_ = /* state : None */0;
+
+console.log("Record:\n", player1);
 
 Curry._4(Printf.printf(/* Format */[
           /* String_literal */Block.__(11, [
@@ -65,22 +85,6 @@ var a = 1;
 
 var c = 34.56;
 
-var player1 = /* record */[
-  /* name */"BurgerLizard",
-  /* powerLevel */9000.126,
-  /* classes : :: */[
-    "NecroPaladin",
-    /* :: */[
-      "NinjaBerserker",
-      /* [] */0
-    ]
-  ],
-  /* location : record */[
-    /* country */"tw",
-    /* state : None */0
-  ]
-];
-
 var powerLevel = 9000.126;
 
 var state = /* None */0;
@@ -94,4 +98,5 @@ exports.powerLevel = powerLevel;
 exports.classes = classes;
 exports.country = country;
 exports.state = state;
+exports.state_ = state_;
 /*  Not a pure module */

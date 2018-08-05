@@ -16,7 +16,7 @@ type player = {
 }
 
 let player1 = {
-  name: "BurgerLizard",
+  name: "BurgerKingLizard",
   powerLevel: 9000.126,
   classes: ["NecroPaladin", "NinjaBerserker"],
   location: {
@@ -26,7 +26,9 @@ let player1 = {
 };
 
 let {name, powerLevel, classes, location: {country, state}} = player1;
+let state_ = player1.location.state;
 
+Js.log2("Record:\n", player1);
 Printf.printf("name: %s, powerLevel: %0.2f, country: %s, state: %s\n", 
   name, powerLevel, country, 
   state |. Option.getWithDefault("N/A"));
