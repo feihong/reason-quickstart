@@ -13,6 +13,7 @@ const expressWs = require('express-ws')(app)
 app.use(express.static('public'))
 
 const converter = new showdown.Converter()
+const markdown = (s) => converter.makeHtml(s)
 
 nunjucks.configure('templates', {
   express: app,
@@ -44,12 +45,7 @@ function runCommand(cmd) {
 function getDescription(text) {
   // Get the contents of the top multiline comment (everything between /* and */)
   let groups = /^\/\*([\s\S]*?)\*\//.exec(text.trim())
-  
-  if (groups === null) {
-    return ''
-  } else {
-    return converter.makeHtml(groups[1])
-  }
+  return (groups === null) ? '' : markdown(groups[1])
 }
 
 //***** ROUTES *****// 
@@ -85,9 +81,7 @@ app.get('/example/:name', async (req, res) => {
 
 app.ws('/reload', (ws, req) => {
   sockets.push(ws)
-  ws.on('close', () => {
-    sockets = sockets.filter(socket => socket !== ws)
-  })
+  ws.on('close', () => sockets = sockets.filter(socket => socket !== ws))
 })
 
 const listener = app.listen(process.env.PORT || 8000, () => {
@@ -95,7 +89,7 @@ const listener = app.listen(process.env.PORT || 8000, () => {
 
   fs.watch(examplesDir, {recursive: true}, (eventType, filename) => {
     if (eventType === 'change' && path.extname(filename) === '.re') {
-      console.log('Reloading...')      
+      console.log(`${filename} changed, reloading...`)      
       sockets.forEach(socket => socket.send('reload'))
     }
   })
