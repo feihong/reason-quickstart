@@ -3,15 +3,17 @@
 {% block title %}Reason Quickstart{% endblock %}
 
 {% block content %}
-<h1>Reason Quickstart</h1>
+<main class="container">
+  <h1>Reason Quickstart</h1>
 
-<h2>Examples</h2>
+  <h2>Examples</h2>
 
-<ul>
-{% for example in examples %}
-  <li>
-    <a href="example/{{ example }}">{{ example }}</a>
-  </li>
-{% endfor %}
-</ul>
+  <ul>
+  {% for example in examples %}
+    <li>
+      <a href="example/{{ example }}">{{ example }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+</main>
 {% endblock %}

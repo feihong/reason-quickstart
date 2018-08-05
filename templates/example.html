@@ -6,7 +6,9 @@
 <style>
   .output {
     font-family: monospace;
-    padding: 1rem;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    overflow-wrap: break-word;
     border: 1px dashed gray;
     background-color: snow;
   }
@@ -23,7 +25,7 @@
 <script>
 const url = 'ws://' + document.location.host + '/reload'
 const socket = new WebSocket(url)
-socket.addEventListener('close', () => console.log('Websocket was closed'))
+// socket.addEventListener('close', () => console.log('Websocket was closed'))
 socket.addEventListener('message', () => window.location.reload(true))
 </script>
 
