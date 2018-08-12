@@ -5,7 +5,7 @@ https://bucklescript.github.io/docs/en/object.html#record-mode
 */
 open Belt;
 
-let response = [%bs.raw {| 
+let response = [%bs.raw {|
 {
   events: [
     {
@@ -25,7 +25,7 @@ let response = [%bs.raw {|
       rsvp_count: 305
     }
   ]
-}    
+}
 |}];
 
 /* It looks like we are defining a record type, but it's just syntactic sugar,
@@ -52,7 +52,7 @@ module Event = {
 
 let getEvents = (response) => {
   let events: array(Event.t) = response##events;
-  events;    
+  events;
 };
 
 /* Js.log(getEvents(response)); */
@@ -60,11 +60,11 @@ let getEvents = (response) => {
 getEvents(response)
 |. Array.forEach(evt => {
     open Event;
-    Printf.printf("%s (%i guests)\n", evt |. name, evt |. rsvp_count);
-    Printf.printf("  This is a %s event\n", evt |. type_);
-    switch(evt |. venue) {
+    Printf.printf("%s (%i guests)\n", evt->nameGet, evt->rsvp_countGet);
+    Printf.printf("  This is a %s event\n", evt->type_Get);
+    switch(evt->venueGet) {
     | None => Js.log("  Venue is not known")
-    | Some(v) => Js.log("  " ++ (v |. Venue.address))
+    | Some(v) => Js.log("  " ++ (v->Venue.addressGet))
     };
-    Js.log("  " ++ (evt |. description) ++ "\n");
+    Js.log("  " ++ (evt->descriptionGet) ++ "\n");
 });

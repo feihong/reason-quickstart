@@ -7,8 +7,9 @@
     "start": "run-p bsb:watch server",
     "bsb:watch": "bsb -make-world -w",
     "server": "node server.js",
-    "build": "bsb -clean-world -make-world",
+    "build": "bsb -make-world",
     "clean": "bsb -clean-world",
+    "pretest": "yarn build",
     "test": "jest",
     "testw": "jest --watch"
   },
@@ -17,10 +18,10 @@
     "Reason"
   ],
   "devDependencies": {
-    "@glennsl/bs-jest": "^0.4.2",
-    "@glennsl/bs-json": "^2.0.0",
-    "bs-axios": "^0.0.36",
-    "bs-platform": "^3.1.5"
+    "@glennsl/bs-jest": "^0.4.3",
+    "@glennsl/bs-json": "^3.0.0",
+    "bs-axios": "^0.0.39",
+    "bs-platform": "^4.0.3"
   },
   "dependencies": {
     "express": "^4.16.3",
