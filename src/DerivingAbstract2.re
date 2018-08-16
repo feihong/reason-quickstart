@@ -1,16 +1,17 @@
 [@bs.deriving abstract]
 type jsProps('a) = {
   value: 'a,
-  onChange: ('a, int) => unit
+  onChange: ('a, int) => unit,
 };
 
 [@bs.deriving abstract]
 type team = {
   name: string,
-  rank: int
-}
+  rank: int,
+};
 
-let object_: jsProps(team) = [%bs.raw {|
+let object_: jsProps(team) = [%bs.raw
+  {|
   {
     value: {
       name: 'Rolling Rocket Thundernauts',
@@ -20,9 +21,10 @@ let object_: jsProps(team) = [%bs.raw {|
       console.log('Inside onChange:', v.name, v.rank, n + 1)
     }
   }
-|}];
+|}
+];
 
 Js.log(object_);
-object_ |. value |. name |. Js.log;
-let func = object_ |. onChange;
-func(object_ |. value, 55);
+object_->valueGet->nameGet->Js.log;
+let func = object_->onChangeGet;
+func(object_->valueGet, 55);

@@ -1,10 +1,11 @@
 /*
-  
-https://bucklescript.github.io/docs/en/object-deprecated.html
- 
-*/
 
-let response = [%bs.raw {| 
+ https://bucklescript.github.io/docs/en/object-deprecated.html
+
+ */
+
+let response = [%bs.raw
+  {|
 {
   events: [
     {
@@ -24,8 +25,9 @@ let response = [%bs.raw {|
       rsvp_count: 305
     }
   ]
-}    
-|}];
+}
+|}
+];
 
 type venue = {
   name: string,
@@ -41,12 +43,12 @@ type event = {
 };
 
 module Decode = {
-  let venue = json => 
+  let venue = json =>
     Json.Decode.{
       name: json |> field("name", string),
       address: json |> field("address", string),
     };
-  
+
   let event = json =>
     Json.Decode.{
       name: json |> field("name", string),
@@ -57,14 +59,14 @@ module Decode = {
     };
 };
 
-response##events 
-  |> Json.Decode.array(Decode.event)
-  |> Array.iter(evt => {
-    /* Js.log(evt); */
-    Js.log(evt.name);
-    switch(evt.venue) {
-    | None => Js.log("Venue unknown")
-    | Some(venue_) => Js.log("At " ++ venue_.name)
-    };
-    Js.log("====");
-  });
+response##events
+|> Json.Decode.array(Decode.event)
+|> Array.iter(evt => {
+     /* Js.log(evt); */
+     Js.log(evt.name);
+     switch (evt.venue) {
+     | None => Js.log("Venue unknown")
+     | Some(venue_) => Js.log("At " ++ venue_.name)
+     };
+     Js.log("====");
+   });

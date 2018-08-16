@@ -6,14 +6,14 @@ Js.log4("Tuple values:", a, b, c);
 type location = {
   country: string,
   state: option(string),
-}
+};
 
 type player = {
   name: string,
   powerLevel: float,
-  classes: list(string),     /* class is a reserved keyword */
-  location: location,
-}
+  classes: list(string), /* class is a reserved keyword */
+  location,
+};
 
 let player1 = {
   name: "BurgerKingLizard",
@@ -22,14 +22,18 @@ let player1 = {
   location: {
     country: "tw",
     state: None,
-  }
+  },
 };
 
 let {name, powerLevel, classes, location: {country, state}} = player1;
 let state_ = player1.location.state;
 
 Js.log2("Record:\n", player1);
-Printf.printf("name: %s, powerLevel: %0.2f, country: %s, state: %s\n", 
-  name, powerLevel, country, 
-  state |. Option.getWithDefault("N/A"));
+Printf.printf(
+  "name: %s, powerLevel: %0.2f, country: %s, state: %s\n",
+  name,
+  powerLevel,
+  country,
+  state->(Option.getWithDefault("N/A")),
+);
 Js.log2("Classes:", classes);

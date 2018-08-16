@@ -4,7 +4,7 @@
 var $$Array = require("bs-platform/lib/js/array.js");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 
-var response = ( 
+var response = (
 {
   events: [
     {
@@ -24,7 +24,7 @@ var response = (
       rsvp_count: 305
     }
   ]
-}    
+}
 );
 
 function venue(json) {

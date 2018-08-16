@@ -1,8 +1,8 @@
 /*
 
-@@ is function composition operator
+ @@ is function composition operator
 
-*/
+ */
 
 let add5 = x => x + 5;
 let mult2 = x => x * 2;

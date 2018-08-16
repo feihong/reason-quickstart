@@ -8,7 +8,7 @@ let players = [%bs.obj [|
   },
   {
     name: "Brolinho",
-    scores: [|4, 5, 6|],    
+    scores: [|4, 5, 6|],
     avatar: {
       url: "https://avtr.com/brolinho"
     }
@@ -18,7 +18,7 @@ let players = [%bs.obj [|
 
 /* Js.log(players); */
 
-players 
+players
 |> Js.Array.forEachi((player, i) => {
   Js.log3("Player", i, player##name);
   Js.log2("First score:", (player##scores)[0]);
