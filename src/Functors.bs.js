@@ -2,11 +2,12 @@
 'use strict';
 
 var Curry = require("bs-platform/lib/js/curry.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 
 function MakeDelta(Delta) {
   var toMessage = function (current, previous) {
     var delta = Curry._2(Delta[/* subtract */0], current, previous);
-    var match = Curry._1(Delta[/* isPositive */2], delta);
+    var match = Caml_obj.caml_compare(current, previous) === 1;
     var sign = match ? "+" : "";
     return Curry._1(Delta[/* toString */1], current) + (" (" + (sign + (Curry._1(Delta[/* toString */1], delta) + ")")));
   };
@@ -15,7 +16,7 @@ function MakeDelta(Delta) {
 
 function toMessage(current, previous) {
   var delta = current - previous | 0;
-  var match = delta > 0;
+  var match = Caml_obj.caml_compare(current, previous) === 1;
   var sign = match ? "+" : "";
   return String(current) + (" (" + (sign + (String(delta) + ")")));
 }
@@ -28,7 +29,7 @@ function toString(x) {
 
 function toMessage$1(current, previous) {
   var delta = current - previous;
-  var match = delta > 0;
+  var match = Caml_obj.caml_compare(current, previous) === 1;
   var sign = match ? "+" : "";
   return toString(current) + (" (" + (sign + (toString(delta) + ")")));
 }
