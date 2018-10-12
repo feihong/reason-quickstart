@@ -4,12 +4,12 @@
 var Curry = require("bs-platform/lib/js/curry.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 
-function MakeDelta(Delta) {
+function MakeDelta(D) {
   var toMessage = function (current, previous) {
-    var delta = Curry._2(Delta[/* subtract */0], current, previous);
+    var delta = Curry._2(D[/* subtract */0], current, previous);
     var match = Caml_obj.caml_compare(current, previous) === 1;
     var sign = match ? "+" : "";
-    return Curry._1(Delta[/* toString */1], current) + (" (" + (sign + (Curry._1(Delta[/* toString */1], delta) + ")")));
+    return Curry._1(D[/* toString */1], current) + (" (" + (sign + (Curry._1(D[/* toString */1], delta) + ")")));
   };
   return /* module */[/* toMessage */toMessage];
 }

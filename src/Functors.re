@@ -4,12 +4,12 @@ module type Delta = {
   let toString: t => string;
 };
 
-module MakeDelta = (Delta: Delta) => {
-  type t = Delta.t;
+module MakeDelta = (D: Delta) => {
+  type t = D.t;
   let toMessage = (~current: t, ~previous: t) => {
-    let delta = Delta.subtract(current, previous);
+    let delta = D.subtract(current, previous);
     let sign = compare(current, previous) == 1 ? "+" : "";
-    Delta.toString(current) ++ " (" ++ sign ++ Delta.toString(delta) ++ ")";
+    D.toString(current) ++ " (" ++ sign ++ D.toString(delta) ++ ")";
   };
 };
 
