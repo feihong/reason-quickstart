@@ -10,4 +10,9 @@ console.log("__MODULE__:", "MagicVariables-HelloReason");
 
 console.log("__LINE__:", 7);
 
+console.log("__MODULE__ inside InnerModule:", "MagicVariables-HelloReason");
+
+var InnerModule = /* module */[];
+
+exports.InnerModule = InnerModule;
 /*  Not a pure module */
