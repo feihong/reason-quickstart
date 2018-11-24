@@ -4,36 +4,34 @@
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 
-var myPromise = new Promise((function (resolve, _) {
-        return resolve(2);
-      }));
+function evenPromise(num) {
+  return new Promise((function (resolve, reject) {
+                var match = num % 2 === 0;
+                if (match) {
+                  return resolve(num);
+                } else {
+                  return reject([
+                              Caml_builtin_exceptions.failure,
+                              "Not an even number"
+                            ]);
+                }
+              }));
+}
 
 var unusedPromise = Promise.resolve(5);
 
-myPromise.then((function (value) {
-          return Promise.resolve(value);
-        })).catch((function (err) {
+evenPromise(2).catch((function (err) {
         console.log(err);
         return Promise.resolve(-1);
       }));
 
-myPromise.then((function (value) {
-          var match = value === 2;
-          if (match) {
-            return Promise.reject([
-                        Caml_builtin_exceptions.failure,
-                        "rejection!"
-                      ]);
-          } else {
-            return Promise.resolve(value);
-          }
-        })).catch((function (err) {
+evenPromise(3).catch((function (err) {
         console.log(err);
         return Promise.resolve(-1);
       }));
 
-myPromise.then((function (value) {
-          var match = value === 2;
+evenPromise(4).then((function (value) {
+          var match = value === 4;
           if (match) {
             return Pervasives.failwith("exception!");
           } else {
@@ -44,14 +42,7 @@ myPromise.then((function (value) {
         return Promise.resolve(-1);
       }));
 
-myPromise.then((function (value) {
-          var match = value === 2;
-          if (match) {
-            return Pervasives.failwith("exception!");
-          } else {
-            return Promise.resolve(value);
-          }
-        })).catch((function (err) {
+evenPromise(7).catch((function (err) {
         if (err[0] === Caml_builtin_exceptions.failure) {
           console.log("After coercion to exn: " + err[1]);
         } else {
@@ -60,6 +51,6 @@ myPromise.then((function (value) {
         return Promise.resolve(-1);
       }));
 
-exports.myPromise = myPromise;
+exports.evenPromise = evenPromise;
 exports.unusedPromise = unusedPromise;
-/* myPromise Not a pure module */
+/* unusedPromise Not a pure module */
