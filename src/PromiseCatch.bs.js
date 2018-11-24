@@ -8,11 +8,13 @@ var myPromise = new Promise((function (resolve, _) {
         return resolve(2);
       }));
 
+var unusedPromise = Promise.resolve(5);
+
 myPromise.then((function (value) {
           return Promise.resolve(value);
         })).catch((function (err) {
         console.log(err);
-        return Promise.resolve(0);
+        return Promise.resolve(-1);
       }));
 
 myPromise.then((function (value) {
@@ -27,7 +29,7 @@ myPromise.then((function (value) {
           }
         })).catch((function (err) {
         console.log(err);
-        return Promise.resolve(0);
+        return Promise.resolve(-1);
       }));
 
 myPromise.then((function (value) {
@@ -39,8 +41,25 @@ myPromise.then((function (value) {
           }
         })).catch((function (err) {
         console.log(err);
-        return Promise.resolve(0);
+        return Promise.resolve(-1);
+      }));
+
+myPromise.then((function (value) {
+          var match = value === 2;
+          if (match) {
+            return Pervasives.failwith("exception!");
+          } else {
+            return Promise.resolve(value);
+          }
+        })).catch((function (err) {
+        if (err[0] === Caml_builtin_exceptions.failure) {
+          console.log("After coercion to exn: " + err[1]);
+        } else {
+          console.log("Unknown type of error");
+        }
+        return Promise.resolve(-1);
       }));
 
 exports.myPromise = myPromise;
+exports.unusedPromise = unusedPromise;
 /* myPromise Not a pure module */
