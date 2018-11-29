@@ -1,5 +1,3 @@
-open Belt;
-
 let evenPromise = num =>
   Js.Promise.make((~resolve, ~reject) =>
     num mod 2 == 0 ?
