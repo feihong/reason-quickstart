@@ -7,24 +7,14 @@
     "BuckleScript",
     "Reason"
   ],
-  "devDependencies": {
+  "dependencies": {
     "@glennsl/bs-jest": "^0.4.3",
     "@glennsl/bs-json": "^3.0.0",
     "bs-axios": "^0.0.39",
     "bs-platform": "^4.0.6"
   },
-  "dependencies": {
-    "express": "^4.16.3",
-    "express-ws": "^4.0.0",
-    "fs-extra": "^6.0.1",
-    "glob": "^7.1.2",
-    "nunjucks": "^3.1.4",
-    "showdown": "^1.8.6"
-  },
   "scripts": {
-    "start": "run-p bsb:watch server",
-    "bsb:watch": "bsb -make-world -w",
-    "server": "node server.js",
+    "go": "node go.js",
     "build": "bsb -make-world",
     "clean": "bsb -clean-world",
     "pretest": "yarn build",
