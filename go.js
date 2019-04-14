@@ -1,22 +1,16 @@
 const fs = require('fs')
+const pathlib = require('path')
 const glob = require('glob')
 const childProcess = require('child_process')
 
-if (process.argv.length <= 2) {
-  const files = glob
-    .sync('**/*.re', { cwd: './src' })
-    .map(name => name.substring(0, name.length - 3))
+const examplesDir = './src/'
 
-  console.log('\nPrograms to run:\n')
-  for (let i = 0; i < files.length; i++) {
-    let f = files[i]
-    console.log(`${i + 1}. ${f}`)
+fs.watch(examplesDir, { recursive: true }, (eventType, filename) => {
+  if (filename.endsWith('.bs.js')) {
+    console.log(`${filename} changed, running...\n`)
+    childProcess.spawn(
+      'node',
+      [pathlib.join('./src', filename)],
+      { stdio: 'inherit' })
   }
-  console.log()
-} else {
-  let border = '='.repeat(75)
-  let jsFile = 'src/' + process.argv[2] + '.bs.js'
-
-  console.log(`Running ${jsFile}\n${border}\n`)
-  let child = childProcess.spawn('node', [jsFile], { stdio: 'inherit' })
-}
+})
