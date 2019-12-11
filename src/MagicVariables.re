@@ -21,3 +21,10 @@ Js.log2("__LOC_OF__:", __LOC_OF__(coolFunc));
 Js.log2("__LINE_OF__:", __LINE_OF__(coolFunc));
 
 Js.log2("__POS_OF__:", __POS_OF__(coolFunc));
+
+// Node magic variables:
+let filename: string = [%bs.raw "__filename"];
+Js.log2("__filename:", filename);
+
+let dirname: string = [%bs.raw "__dirname"];
+Js.log2("__dirname:", dirname);

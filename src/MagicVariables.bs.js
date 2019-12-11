@@ -48,6 +48,16 @@ console.log("__POS_OF__:", /* tuple */[
       coolFunc
     ]);
 
+var filename = __filename;
+
+console.log("__filename:", filename);
+
+var dirname = __dirname;
+
+console.log("__dirname:", dirname);
+
 exports.InnerModule = InnerModule;
 exports.coolFunc = coolFunc;
+exports.filename = filename;
+exports.dirname = dirname;
 /*  Not a pure module */
